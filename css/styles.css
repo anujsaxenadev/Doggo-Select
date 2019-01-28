@@ -945,6 +945,7 @@ header {
   box-sizing: border-box; }
 
 .card {
+  cursor: pointer;
   text-align: center;
   border-radius: 6px;
   background-color: #fff;

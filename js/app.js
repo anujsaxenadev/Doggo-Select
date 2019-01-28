@@ -11,7 +11,12 @@ fetch('https://dog.ceo/api/breeds/list')
 function fetchDogImage(){
     fetch(`https://dog.ceo/api/breed/${select.value}/images/random`)
         .then(image => image.json())
-        .then((url) => {card.innerHTML = `<img src="${url.message}"></img>`;});
+        .then((url) => {
+            card.innerHTML = `
+                                <img src="${url.message}"></img>
+                                <p>Click to view more Images of <b>${select.value}</b></p>
+                            `;
+        });
 }
 
 function settingOptions(data){
@@ -21,3 +26,4 @@ function settingOptions(data){
 }
 
 select.addEventListener('change', fetchDogImage);
+card.addEventListener('click', fetchDogImage);
