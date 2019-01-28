@@ -19,3 +19,5 @@ function settingOptions(data){
     const options = data.map(breed => `<option>${breed}</option>`).join('');
     select.innerHTML = options;
 }
+
+select.addEventListener('change', fetchDogImage);
