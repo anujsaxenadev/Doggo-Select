@@ -1,6 +1,9 @@
 const select = document.querySelector('#breeds');
 const card = document.querySelector('.card'); 
 const form = document.querySelector('form');
+const messageDiv = $('#message');
+
+messageDiv.hide();
 
 // Wrapper Function on the Fetch method with Error Handeling
 function fetchData(url){
@@ -34,7 +37,6 @@ function checkStatus(response){
 // Function for fetching the Breed Image according to the Selected Breed
 function fetchBreedImage(){
     const breed = select.value;
-
     fetchData(`https://dog.ceo/api/breed/${breed}/images/random`)
         .then(data => {
             let card = `
@@ -63,17 +65,20 @@ function postData(e){
     }
     fetch('https://jsonplaceholder.typicode.com/comments', config)
         .then(checkStatus)
-        .then(data => displayMessage(data));
+        .then(data => displayMessage(data))
 }
 
+// Function for Displaying message.
 function displayMessage(data){
-    if(data.ok == true){
-        console.log('Thanks for your Comment');
-    }
-    else{
-        console.log(`Your Comment can't be Posted. Please contact to Customer Care.`);
-    }
-    console.log(data);
+    const flag = data.ok;
+    const message = `
+        <div class="alert alert-${flag ? 'success' : 'danger'}">
+            <strong>${flag ? 'Comment Posted! : ' : 'Error in Posting : '}</strong>
+            ${flag ? 'Thanks for your Comment.': "Your Comment can't be Posted. Please contact to Customer Care."}
+        </div>
+    `;
+    messageDiv.html(message);
+    messageDiv.fadeIn("slow").delay(2000).slideUp();    
 }
 
 // Event Listeners for changing the Image
