@@ -45,6 +45,40 @@ function fetchBreedImage(){
         });
 }
 
+// Function for Posting the Data
+function postData(e){
+    e.preventDefault();
+    const name = document.querySelector('#name').value;
+    const comment = document.querySelector('#comment').value;
+    const body = {
+        name: name,
+        comment: comment,
+    }
+    const config = {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body : JSON.stringify(body)
+    }
+    fetch('https://jsonplaceholder.typicode.com/comments', config)
+        .then(checkStatus)
+        .then(data => displayMessage(data));
+}
+
+function displayMessage(data){
+    if(data.ok == true){
+        console.log('Thanks for your Comment');
+    }
+    else{
+        console.log(`Your Comment can't be Posted. Please contact to Customer Care.`);
+    }
+    console.log(data);
+}
+
 // Event Listeners for changing the Image
 select.addEventListener('change', fetchBreedImage);
 card.addEventListener('click', fetchBreedImage);
+
+// Event Listener for Posting Data
+form.addEventListener('submit',postData);
