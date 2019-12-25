@@ -15,7 +15,10 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+  
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/lightboxgallery-min.css">
 </head>
 <body>
   <header>
@@ -38,6 +41,35 @@
       <button type="submit" id="submit">Submit</button>
     </form>
   </div>
+  <br />
+  <br />
+  <div class="container"><hr />
+    <h4 style="text-align: left;">More images on this breed</h4>
+      <div class="lightboxgallery-gallery clearfix" id = "moreDogs">
+        
+      </div>
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      &copy; <a target="_blank" href="https://github.com/anujsaxenadev">Anuj Saxena</a> | Images from <a target="_blank" href="https://dog.ceo/">Dog API</a>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="js/lightboxgallery-min.js"></script>
   <script src="js/app.js"></script>
+  <script type="text/javascript">
+  jQuery(function($) {
+    $(document).on('click', '.lightboxgallery-gallery-item', function(event) {
+      event.preventDefault();
+      $(this).lightboxgallery({
+        showCounter: true,
+        showTitle: true,
+        showDescription: true
+      });
+    });
+  });
+  </script>
 </body>
 </html>

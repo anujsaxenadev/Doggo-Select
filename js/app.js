@@ -2,6 +2,7 @@ const select = document.querySelector('#breeds');
 const card = document.querySelector('.card'); 
 const form = document.querySelector('form');
 const messageDiv = $('#message');
+const moreDogsCount = 8;
 
 messageDiv.hide();
 
@@ -44,6 +45,21 @@ function fetchBreedImage(){
                 <p>Click to view more <b>${breed}s</b></p>
             `;
             document.querySelector(".card").innerHTML = card;
+        });
+    fetchData(`https://dog.ceo/api/breed/${breed}/images/random/${moreDogsCount}`)
+        .then(data => {
+            console.log(data);
+            let moreDogs = ``;
+            for(i = 0; i < data.message.length; i++){
+                moreDogs = moreDogs + `
+                <a style = "width: 25%;" class="lightboxgallery-gallery-item" target="_blank" href="${data.message[i]}">
+                  <div>
+                    <img style="max-height: 100px" src="${data.message[i]}">
+                  </div>
+                </a>
+                `
+            }
+            document.querySelector("#moreDogs").innerHTML = moreDogs;
         });
 }
 
